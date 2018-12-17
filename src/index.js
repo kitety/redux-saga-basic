@@ -3,12 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from "redux";
-import rootRducer from './reducers'
-import { Provider } from 'react-redux'
-import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store = createStore(rootRducer, composeWithDevTools())
+import { createStore, applyMiddleware } from "redux";
+import rootReducer from './reducers'
+import { composeWithDevTools } from 'redux-devtools-extension';
+import createSagaMiddleware from 'redux-saga'
+import { hello } from './sagas'
+
+import { Provider } from 'react-redux'
+
+// 创建中间件
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
+sagaMiddleware.run(hello)
 
 ReactDOM.render(
   <Provider store={store}>
