@@ -14,6 +14,7 @@ import { Provider } from 'react-redux'
 
 // 创建中间件
 const sagaMiddleware = createSagaMiddleware()
+// 使用中间件
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
 sagaMiddleware.run(hello)
 
