@@ -1,5 +1,5 @@
 import { delay } from 'redux-saga'
-import { takeEvery, put, takeLatest, call } from 'redux-saga/effects'
+import { takeEvery, put, takeLatest, call,all } from 'redux-saga/effects'
 import { INCREMENT, INCREMENT_ASYNC, GET_USER_REQUEST } from '../constants/'
 import { increment } from '../actions/counter'
 import axios from 'axios'
@@ -21,12 +21,27 @@ function* fetchUser () {
   console.log(user);
 }
 
-export function* watchIncrementAsync () {
+function* watchIncrementAsync () {
   // 监听action,触发函数
   // yield takeEvery(INCREMENT_ASYNC, incrementAsync);
   yield takeLatest(INCREMENT_ASYNC, incrementAsync);
 }
-export function* watchFetchUser () {
+function* watchFetchUser () {
   // 监听action,触发函数
   yield takeEvery(GET_USER_REQUEST, fetchUser);
+}
+// 可以直接将yield takeEvery语句放进来
+// 可以进行yield 数组 (过时)
+// 可以进行yield all(数组)
+
+// export default function* rootSaga () {
+//    yield takeLatest(INCREMENT_ASYNC, incrementAsync);
+//    yield takeEvery(GET_USER_REQUEST, fetchUser);
+// }
+// export default function* rootSaga () {
+// 并发执行
+//   yield [watchIncrementAsync(), watchFetchUser()]
+// }
+export default function* rootSaga () {
+  yield all([watchIncrementAsync(), watchFetchUser()])
 }
