@@ -1,5 +1,5 @@
 import { delay } from 'redux-saga'
-import { takeEvery, put } from 'redux-saga/effects'
+import { takeEvery, put,takeLatest } from 'redux-saga/effects'
 import { INCREMENT, INCREMENT_ASYNC } from '../constants/'
 import { increment } from '../actions/counter'
 // const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -14,5 +14,6 @@ function* incrementAsync () {
 }
 export function* watchIncrementAsync () {
   // 监听action,触发函数
-  yield takeEvery(INCREMENT_ASYNC, incrementAsync);
+  // yield takeEvery(INCREMENT_ASYNC, incrementAsync);
+  yield takeLatest(INCREMENT_ASYNC, incrementAsync);
 }
