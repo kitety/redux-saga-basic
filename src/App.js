@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux'
 import { increment } from './actions/counter'
+import './generator'
 
 
 class App extends Component {
