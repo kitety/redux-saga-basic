@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux'
-import { increment } from './actions/counter'
-import './generator'
+import { increment, incrementAsync } from './actions/counter'
+// generator的函数学习
+// import './generator'
 
 
 class App extends Component {
@@ -28,6 +29,8 @@ class App extends Component {
           </p>
           <p>
             <button onClick={this.props.increment}>+</button>
+            <br/>
+            <button onClick={this.props.incrementAsync}>Async +</button>
           </p>
         </header>
       </div>
@@ -40,4 +43,4 @@ const mapStateToProps = (state) => {
     counter: state.counter
   }
 }
-export default connect(mapStateToProps, { increment })(App);
+export default connect(mapStateToProps, { increment, incrementAsync })(App);

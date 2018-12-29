@@ -1,5 +1,5 @@
 
-import { INCREMENT } from '../constants/constants'
+import { INCREMENT } from '../constants'
 const counter = (state = 1, actions = {}) => {
   switch (actions.type) {
     case INCREMENT:
