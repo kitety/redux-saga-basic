@@ -23,3 +23,14 @@ export function* watchFetchTodos () {
   yield takeEvery(GET_TODOS_REQUEST, fetchTodos);
 }
 
+// 方法2
+// export const counterSaga=[
+//   watchFetchUser(), watchFetchTodos()
+// ]
+
+// index.js
+/**
+ * yield all([...counterSaga])  
+ * 这种方式
+ */
+
