@@ -1,5 +1,5 @@
 import { takeEvery, put, takeLatest, call, all } from 'redux-saga/effects'
-import { GET_USER_REQUEST, GET_TODOS_REQUEST } from '../constants/'
+import { GET_USER_REQUEST, GET_TODOS_REQUEST, FETCH_USER_SUCCESS } from '../constants/'
 import axios from 'axios'
 
 // 延时函数
@@ -8,6 +8,7 @@ import axios from 'axios'
 function* fetchUser () {
   const user = yield call(axios.get, "https://jsonplaceholder.typicode.com/users")
   console.log(user);
+  yield put({ type: FETCH_USER_SUCCESS, user: user })
 }
 function* fetchTodos () {
   const todos = yield call(axios.get, "https://jsonplaceholder.typicode.com/todos")
@@ -30,7 +31,7 @@ export function* watchFetchTodos () {
 
 // index.js
 /**
- * yield all([...counterSaga])  
+ * yield all([...counterSaga])
  * 这种方式
  */
 
