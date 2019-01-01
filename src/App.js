@@ -13,6 +13,7 @@ class App extends Component {
     let data
     if (error) {
       data = error
+      // console.dir(error.response.message);
     } else if (isFetching) {
       data = "Loading..."
     } else {

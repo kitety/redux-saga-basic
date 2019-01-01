@@ -1,14 +1,19 @@
 import { takeEvery, put, takeLatest, call, all } from 'redux-saga/effects'
-import { GET_USER_REQUEST, GET_TODOS_REQUEST, FETCH_USER_SUCCESS } from '../constants/'
+import { GET_USER_REQUEST, GET_TODOS_REQUEST, FETCH_USER_SUCCESS, FETCH_USER_FAILED } from '../constants/'
 import axios from 'axios'
 
 // 延时函数
 // const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 function* fetchUser () {
-  const user = yield call(axios.get, "https://jsonplaceholder.typicode.com/users")
-  console.log(user);
-  yield put({ type: FETCH_USER_SUCCESS, user: user })
+  try {
+    const user = yield call(axios.get, "https://jsonplaceholder.typicode.com/users")
+    yield put({ type: FETCH_USER_SUCCESS, user: user })
+    console.log(user);
+  } catch (err) {
+    // 出错
+    yield put({ type: FETCH_USER_FAILED, err: err.message })
+  }
 }
 function* fetchTodos () {
   const todos = yield call(axios.get, "https://jsonplaceholder.typicode.com/todos")

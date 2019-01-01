@@ -1,4 +1,4 @@
-import { GET_USER_REQUEST, FETCH_USER_SUCCESS } from '../constants'
+import { GET_USER_REQUEST, FETCH_USER_SUCCESS, FETCH_USER_FAILED } from '../constants'
 const initialState = {
   isFetching: false,
   error: null,
@@ -18,6 +18,12 @@ const user = (state = initialState, actions = {}) => {
         isFetching: false,
         error: null,
         user: actions.user
+      }
+    case FETCH_USER_FAILED:
+      return {
+        isFetching: false,
+        error: actions.err,
+        user: null
       }
     default:
       return state;
